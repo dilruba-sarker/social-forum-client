@@ -14,10 +14,14 @@ import { GoogleAuthProvider } from "firebase/auth";
 
 import { auth } from "../../firebase.init";
 
+
+
 const provider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
+
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
+  
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
@@ -35,6 +39,7 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return updateProfile(auth.currentUser, updateData);
   };
+
 
   const logOut = () => {
     setLoading(true);

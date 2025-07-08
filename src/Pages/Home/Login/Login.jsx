@@ -3,12 +3,15 @@ import { useForm } from "react-hook-form";
 
 import { toast } from "react-hot-toast";
 import { useNavigate, Link } from "react-router";
-import { FcGoogle } from "react-icons/fc";
+
 import { AuthContext } from "../../../context/AuthContext";
+import useAxios from "../../../hook/useAxios";
+import SocialLogin from "../../../Component/SocialLogin";
 
 const Login = () => {
-  const { signInUser, googleSignin } = useContext(AuthContext);
+  const { signInUser } = useContext(AuthContext);
   const navigate = useNavigate();
+   const axiosSecure = useAxios();
 
   const {
     register,
@@ -32,17 +35,10 @@ const Login = () => {
       });
   };
 
-  const handleGoogleLogin = () => {
-    googleSignin()
-      .then(() => {
-        toast.success("Logged in with Google!");
-        navigate("/");
-      })
-      .catch((error) => {
-        console.error("Google login error:", error);
-        toast.error(error.message);
-      });
-  };
+
+
+
+
 
   return (
     <div className="min-h-screen bg-base-200 flex items-center justify-center">
@@ -90,16 +86,10 @@ const Login = () => {
           </button>
         </form>
 
-        <div className="divider">OR</div>
+        {/* <div className="divider">OR</div> */}
 
         {/* Google Login Button */}
-        <button
-          onClick={handleGoogleLogin}
-          className="btn btn-outline w-full flex items-center gap-2"
-        >
-          <FcGoogle size={20} />
-          Continue with Google
-        </button>
+       <SocialLogin></SocialLogin>
 
         <p className="text-center text-sm text-gray-600 mt-2">
           Don’t have an account?{" "}
