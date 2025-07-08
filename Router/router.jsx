@@ -12,6 +12,7 @@ import MyProfile from "../src/Pages/Dashboard/MyProfile/MyProfile";
 import AddPost from "../src/Pages/Dashboard/AddPost/AddPost";
 import MyPosts from "../src/Pages/MyPosts/MyPosts";
 import Membership from "../src/Pages/Membership/Membership";
+import AllPosts from "../src/Pages/AllPosts/AllPosts";
 export const router = createBrowserRouter([
   { path: "/",
      Component: Root ,
@@ -24,6 +25,9 @@ export const router = createBrowserRouter([
          {
           path:'/register',
           element:<Register></Register>
+         },{
+          path:'allpost',
+          element:<AllPosts></AllPosts>
          },
          {
           path:'/membership',
