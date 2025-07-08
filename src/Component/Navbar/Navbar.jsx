@@ -41,6 +41,15 @@ const Navbar = () => {
           </ul>
         </div>
         <img src={logo} alt="logo" className="w-28 h-20" />
+
+
+        {user?.badge && (
+ 
+    <p className="text-sm font-semibold text-yellow-600">
+      🏅 {user.badge} Badge
+    </p>
+ 
+)}
       </div>
 
       {/* Desktop Links */}

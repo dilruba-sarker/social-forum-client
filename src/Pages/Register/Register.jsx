@@ -150,6 +150,7 @@ import axios from "axios";
 import useAxios from "../../hook/useAxios";
 import { AuthContext } from "../../context/AuthContext";
 import SocialLogin from "../../Component/SocialLogin";
+import toast from "react-hot-toast";
 
 
 
@@ -199,8 +200,12 @@ const Register = () => {
 
         navigate("/");
       })
-      .catch((error) => {
-        console.error("❌ Error during registration:", error.message);
+      .catch((err) => {
+        if(err.response?.status === 409){
+        
+          toast.error("⚠️ User already exists!");
+        }
+        console.error("❌ Error during registration:", err.message);
       });
   };
 

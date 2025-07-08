@@ -29,9 +29,10 @@ const Login = () => {
         reset();
         navigate("/");
       })
-      .catch((error) => {
-        console.error("Login error:", error);
-        toast.error(error.message);
+      .catch((err) => {
+
+        console.error("Login error:", err);
+       
       });
   };
 

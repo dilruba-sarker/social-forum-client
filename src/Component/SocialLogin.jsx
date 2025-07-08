@@ -1,15 +1,16 @@
 import React, { use } from "react";
 
-import { useLocation, useNavigate } from "react-router";
+import {  useNavigate } from "react-router";
 import useAxios from "../hook/useAxios";
 import { AuthContext } from "../context/AuthContext";
+
 
 const SocialLogin = () => {
   const { googleSignin } = use(AuthContext);
 
   const axiosSecure = useAxios();
-  const location = useLocation();
-  const from = location?.state?.from || "/";
+//   const location = useLocation();
+//   const from = location?.state?.from || "/";
   const navigate = useNavigate();
   const handleGoogleSignin = () => {
     googleSignin()
@@ -31,10 +32,13 @@ const SocialLogin = () => {
         const resUsr = await axiosSecure.post("/users", userInfo);
         console.log("User saved:", resUsr.data);
 
-        navigate(from);
+       
+           navigate("/");
       })
-      .catch((error) => {
-        console.error("Google Sign-in error:", error.message);
+      .catch((err) => {
+ 
+
+        console.error("Google Sign-in error:", err.message);
       });
   };
 

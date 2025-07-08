@@ -58,15 +58,38 @@ const AuthProvider = ({ children }) => {
     setLoading,
   };
 
-  useEffect(() => {
-    const disconnect = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+  // useEffect(() => {
+  //   const disconnect = onAuthStateChanged(auth, (currentUser) => {
+  //     setUser(currentUser);
      
-      console.log("User status changed:", currentUser);
-      setLoading(false);
-    });
-    return () => disconnect();
-  }, []);
+  //     console.log("User status changed:", currentUser);
+  //     setLoading(false);
+  //   });
+  //   return () => disconnect();
+  // }, []);
+useEffect(() => {
+  const disconnect = onAuthStateChanged(auth, async (currentUser) => {
+    setLoading(true);
+
+    if (currentUser?.email) {
+      try {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/users/${currentUser.email}`);
+        const data = await res.json();
+        setUser(data); // ✅ now user contains badge, role, etc.
+        console.log("Fetched user from DB:", data);
+      } catch (error) {
+        console.error("Failed to fetch user from DB:", error);
+        setUser(currentUser); // fallback to Firebase user
+      }
+    } else {
+      setUser(null);
+    }
+
+    setLoading(false);
+  });
+
+  return () => disconnect();
+}, []);
 
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
