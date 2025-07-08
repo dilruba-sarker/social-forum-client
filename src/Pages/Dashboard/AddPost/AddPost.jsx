@@ -1,191 +1,3 @@
-// // // AddPost.jsx
-// // import React, { useContext, useEffect, useState } from "react";
-// // import { useForm, Controller } from "react-hook-form";
-// // import Select from "react-select";
-// // import { toast } from "react-hot-toast";
-// // import { Link } from "react-router";
-// // import { AuthContext } from "../../../context/AuthContext";
-// // import useAxios from "../../../hook/useAxios";
-
-
-// // const tagOptions = [
-// //   { value: "Technology", label: "Technology" },
-// //   { value: "Health", label: "Health" },
-// //   { value: "Education", label: "Education" },
-// //   { value: "Entertainment", label: "Entertainment" },
-// // ];
-
-// // const AddPost = () => {
-// //   const { user } = useContext(AuthContext);
-// //   const axiosSecure = useAxios();
-// //   const [postCount, setPostCount] = useState(0);
-// //   const [isLoading, setIsLoading] = useState(true);
-// //   const [isMember, setIsMember] = useState(false);
-
-// //   const {
-// //     register,
-// //     handleSubmit,
-// //     control,
-// //     setValue,
-   
-// //     formState: { errors },
-// //   } = useForm();
-
-// //   // Check user's post count and membership status
-// //   useEffect(() => {
-// //     if (user?.email) {
-// //       setIsLoading(true);
-      
-// //       // Check post count
-// //       axiosSecure.get(`/posts/count?email=${user.email}`)
-// //         .then(res => {
-// //           setPostCount(res.data.count);
-          
-// //           // In a real app, you would check the user's role from your auth system
-// //           // For now, we'll assume non-members can only post 5 times
-// //           setIsMember(res.data.count < 5); // Simplified logic
-// //           setIsLoading(false);
-// //         })
-// //         .catch(err => {
-// //           console.error("Failed to get post count:", err);
-// //           setIsLoading(false);
-// //         });
-// //     }
-// //   }, [user, axiosSecure]);
-
-// //   // Set user info in form
-// //   useEffect(() => {
-// //     if (user) {
-// //       setValue("authorName", user.displayName || "");
-// //       setValue("authorEmail", user.email || "");
-// //       setValue("authorImage", user.photoURL || "");
-// //     }
-// //   }, [user, setValue]);
-
-// //   const onSubmit = async (data) => {
-// //     try {
-// //       const res = await axiosSecure.post("/posts", data);
-      
-// //       if (res.data.success) {
-// //         toast.success("Post added successfully!");
-     
-// //         setPostCount(prev => prev + 1);
-// //       } else {
-// //         toast.error(res.data.message || "Failed to add post.");
-// //       }
-// //     } catch (err) {
-// //       console.error("Post error:", err);
-// //       toast.error(err.response?.data?.message || "Failed to add post.");
-// //     }
-// //   };
-
-// //   if (isLoading) {
-// //     return (
-// //       <div className="flex justify-center items-center h-64">
-// //         <span className="loading loading-spinner loading-lg"></span>
-// //       </div>
-// //     );
-// //   }
-
-// //   if (!isMember && postCount >= 5) {
-// //     return (
-// //       <div className="max-w-2xl mx-auto p-6 mt-10 bg-white rounded-xl shadow text-center">
-// //         <h2 className="text-2xl font-bold mb-4 text-red-600">Post Limit Reached</h2>
-// //         <p className="mb-6">You've reached your limit of 5 posts as a free user.</p>
-// //         <p className="mb-6">Upgrade to a membership to continue posting!</p>
-// //         <Link to="/membership" className="btn btn-primary">
-// //           Become a Member
-// //         </Link>
-// //       </div>
-// //     );
-// //   }
-
-// //   else return (
-// //     <div className="max-w-2xl mx-auto p-6 mt-10 bg-white rounded-xl shadow">
-// //       <h2 className="text-2xl font-bold mb-6 text-center text-blue-600">Add a New Post</h2>
-
-// //       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-// //         {/* Author Info (readonly) */}
-// //         <div>
-// //           <label className="label">Author Name</label>
-// //           <input
-// //             {...register("authorName")}
-        
-// //             className="input input-bordered w-full"
-// //             readOnly
-// //           />
-// //         </div>
-
-// //         <div>
-// //           <label className="label">Author Email</label>
-// //           <input
-// //             {...register("authorEmail")}
-     
-// //             className="input input-bordered w-full"
-// //               readOnly
-// //           />
-// //         </div>
-
-// //         <div>
-// //           <label className="label">Author Photo URL</label>
-// //           <input
-// //             {...register("authorImage")}
-      
-// //             className="input input-bordered w-full"
-// //               readOnly
-// //           />
-// //         </div>
-
-// //         {/* Post Title */}
-// //         <div>
-// //           <label className="label">Post Title</label>
-// //           <input
-// //             {...register("title", { required: "Title is required" })}
-// //             className="input input-bordered w-full"
-// //           />
-// //           {errors.title && <p className="text-red-500 text-sm">{errors.title.message}</p>}
-// //         </div>
-
-// //         {/* Post Description */}
-// //         <div>
-// //           <label className="label">Post Description</label>
-// //           <textarea
-// //             {...register("description", { required: "Description is required" })}
-// //             className="textarea textarea-bordered w-full"
-// //             rows={4}
-// //           />
-// //           {errors.description && <p className="text-red-500 text-sm">{errors.description.message}</p>}
-// //         </div>
-
-// //         {/* Tag Selection */}
-// //         <div>
-// //           <label className="label">Tag</label>
-// //           <Controller
-// //             name="tag"
-// //             control={control}
-// //             rules={{ required: "Tag is required" }}
-// //             render={({ field }) => (
-// //               <Select
-// //                 {...field}
-// //                 options={tagOptions}
-// //                 className="react-select-container"
-// //                 classNamePrefix="react-select"
-// //               />
-// //             )}
-// //           />
-// //           {errors.tag && <p className="text-red-500 text-sm">{errors.tag.message}</p>}
-// //         </div>
-
-// //         <button type="submit" className="btn btn-primary w-full">
-// //           Submit Post
-// //         </button>
-// //       </form>
-// //     </div>
-// //   );
-// // };
-
-// // export default AddPost;
-
 
 
 // import React, { useContext, useEffect, useState } from "react";
@@ -194,7 +6,8 @@
 // import { toast } from "react-hot-toast";
 // import { Link } from "react-router";
 // import { AuthContext } from "../../../context/AuthContext";
-// import useAxios from "../../../hook/useAxios";
+// import useAxios from './../../../hook/useAxios';
+
 
 // const tagOptions = [
 //   { value: "Technology", label: "Technology" },
@@ -211,33 +24,44 @@
 //   const [postCount, setPostCount] = useState(0);
 //   const [isLoading, setIsLoading] = useState(true);
 //   const [showLimitMessage, setShowLimitMessage] = useState(false);
+//   const [isMember, setIsMember] = useState(false);
 
 //   const {
 //     register,
 //     handleSubmit,
 //     control,
 //     setValue,
-
 //     formState: { errors },
 //   } = useForm();
 
-//   // Initialize form and check post count
+//   // Initialize user role and post count
 //   useEffect(() => {
 //     const initialize = async () => {
 //       if (user?.email) {
 //         try {
-//           // Set user info in form
+//           // 1. Pre-fill form
 //           setValue("authorName", user.displayName || "");
 //           setValue("authorEmail", user.email || "");
 //           setValue("authorImage", user.photoURL || "");
 
-//           // Check post count
-//           const res = await axiosSecure.get(`/posts/count?email=${user.email}`);
-//           setPostCount(res.data.count);
-//           setShowLimitMessage(res.data.count >= MAX_FREE_POSTS);
+//           // 2. Get user from DB to check role
+//           const userRes = await axiosSecure.get(`/users/${user.email}`);
+//           const dbUser = userRes.data;
+//           const member = dbUser.role === "member";
+//           setIsMember(member);
+
+//           // 3. Count posts
+//           const countRes = await axiosSecure.get(`/posts/count?email=${user.email}`);
+//           const count = countRes.data.count;
+//           setPostCount(count);
+
+//           // 4. If not member and post count exceeded
+//           if (!member && count >= MAX_FREE_POSTS) {
+//             setShowLimitMessage(true);
+//           }
 //         } catch (err) {
-//           console.error("Initialization error:", err);
-//           toast.error("Failed to load post data");
+//           console.error("Init error:", err);
+//           toast.error("Failed to load user info");
 //         } finally {
 //           setIsLoading(false);
 //         }
@@ -251,25 +75,22 @@
 //     try {
 //       const res = await axiosSecure.post("/posts", {
 //         ...data,
-//         tag: data.tag.value, // Convert select object to string
+//         tag: data.tag.value,
 //       });
 
 //       if (res.data.success) {
 //         toast.success("Post added successfully!");
-
-        
-//         // Update post count and check limit
 //         const newCount = postCount + 1;
 //         setPostCount(newCount);
-        
-//         if (newCount >= MAX_FREE_POSTS) {
+
+//         if (!isMember && newCount >= MAX_FREE_POSTS) {
 //           setShowLimitMessage(true);
 //         }
 //       } else {
 //         toast.error(res.data.message || "Failed to add post");
 //       }
 //     } catch (err) {
-//       console.error("Post submission error:", err);
+//       console.error("Post error:", err);
 //       toast.error(err.response?.data?.message || "Failed to add post");
 //     }
 //   };
@@ -284,33 +105,24 @@
 
 //   if (showLimitMessage) {
 //     return (
-//       <div className="max-w-2xl mx-auto p-6 mt-10 bg-white rounded-xl shadow-md text-center animate-fade-in">
+//       <div className="max-w-2xl mx-auto p-6 mt-10 bg-white rounded-xl shadow-md text-center">
 //         <h2 className="text-2xl font-bold mb-4 text-red-600">Post Limit Reached</h2>
-//         <p className="mb-6 text-gray-700">
-//           You've used all {MAX_FREE_POSTS} free posts. Upgrade to continue posting!
+//         <p className="mb-4 text-gray-700">
+//           You've used all {MAX_FREE_POSTS} free posts. Upgrade to post unlimited content!
 //         </p>
-//         <div className="flex flex-col space-y-4">
-//           <Link 
-//             to="/membership" 
-//             className="btn btn-primary w-full"
-//           >
-//             Become a Member
-//           </Link>
-//           <button 
-//             onClick={() => setShowLimitMessage(false)} 
-//             className="btn btn-ghost text-blue-600"
-//           >
-//             View My Posts
-//           </button>
-//         </div>
+//         <Link to="/membership" className="btn btn-primary">
+//           Become a Member
+//         </Link>
 //       </div>
 //     );
 //   }
 
 //   return (
-//     <div className="max-w-2xl mx-auto p-6 mt-10 bg-white rounded-xl shadow-md animate-fade-in">
+//     <div className="max-w-2xl mx-auto p-6 mt-10 bg-white rounded-xl shadow-md">
 //       <h2 className="text-2xl font-bold mb-6 text-center text-blue-600">
-//         {postCount > 0 ? `You've used ${postCount}/${MAX_FREE_POSTS} free posts` : 'Create New Post'}
+//         {isMember
+//           ? `Welcome, Member! You have ${postCount} post${postCount === 1 ? "" : "s"}`
+//           : `You've used ${postCount}/${MAX_FREE_POSTS} free posts`}
 //       </h2>
 
 //       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -342,7 +154,7 @@
 //           </div>
 //         </div>
 
-//         {/* Post Content */}
+//         {/* Post Title */}
 //         <div>
 //           <label className="label">Post Title*</label>
 //           <input
@@ -355,6 +167,7 @@
 //           )}
 //         </div>
 
+//         {/* Description */}
 //         <div>
 //           <label className="label">Description*</label>
 //           <textarea
@@ -368,6 +181,7 @@
 //           )}
 //         </div>
 
+//         {/* Tag */}
 //         <div>
 //           <label className="label">Category*</label>
 //           <Controller
@@ -389,12 +203,8 @@
 //           )}
 //         </div>
 
-//         <button
-//           type="submit"
-//           className="btn btn-primary w-full mt-6"
-//           disabled={postCount >= MAX_FREE_POSTS}
-//         >
-//           {postCount >= MAX_FREE_POSTS - 1 ? 'Last Free Post' : 'Submit Post'}
+//         <button type="submit" className="btn btn-primary w-full mt-6">
+//           Submit Post
 //         </button>
 //       </form>
 //     </div>
@@ -404,102 +214,39 @@
 // export default AddPost;
 
 
-import React, { useContext, useEffect, useState } from "react";
-import { useForm, Controller } from "react-hook-form";
-import Select from "react-select";
-import { toast } from "react-hot-toast";
+
+import React, { useContext } from "react";
+import { useQuery } from "@tanstack/react-query";
+
 import { Link } from "react-router";
 import { AuthContext } from "../../../context/AuthContext";
-import useAxios from './../../../hook/useAxios';
+import useAxios from "../../../hook/useAxios";
 
-
-const tagOptions = [
-  { value: "Technology", label: "Technology" },
-  { value: "Health", label: "Health" },
-  { value: "Education", label: "Education" },
-  { value: "Entertainment", label: "Entertainment" },
-];
-
-const MAX_FREE_POSTS = 5;
-
-const AddPost = () => {
+const MyProfile = () => {
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxios();
-  const [postCount, setPostCount] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
-  const [showLimitMessage, setShowLimitMessage] = useState(false);
-  const [isMember, setIsMember] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    control,
-    setValue,
-    formState: { errors },
-  } = useForm();
+  // Fetch user info
+  const { data: userInfo = {}, isLoading: userLoading } = useQuery({
+    queryKey: ["userInfo", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/users/${user?.email}`);
+      return res.data;
+    },
+    enabled: !!user?.email,
+  });
 
-  // Initialize user role and post count
-  useEffect(() => {
-    const initialize = async () => {
-      if (user?.email) {
-        try {
-          // 1. Pre-fill form
-          setValue("authorName", user.displayName || "");
-          setValue("authorEmail", user.email || "");
-          setValue("authorImage", user.photoURL || "");
+  // Fetch 3 recent posts
+  const { data: recentPosts = [], isLoading: postsLoading } = useQuery({
+    queryKey: ["recentPosts", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/posts/recent?email=${user?.email}&limit=3`);
+      return res.data;
+    },
+    enabled: !!user?.email,
+  });
 
-          // 2. Get user from DB to check role
-          const userRes = await axiosSecure.get(`/users/${user.email}`);
-          const dbUser = userRes.data;
-          const member = dbUser.role === "member";
-          setIsMember(member);
-
-          // 3. Count posts
-          const countRes = await axiosSecure.get(`/posts/count?email=${user.email}`);
-          const count = countRes.data.count;
-          setPostCount(count);
-
-          // 4. If not member and post count exceeded
-          if (!member && count >= MAX_FREE_POSTS) {
-            setShowLimitMessage(true);
-          }
-        } catch (err) {
-          console.error("Init error:", err);
-          toast.error("Failed to load user info");
-        } finally {
-          setIsLoading(false);
-        }
-      }
-    };
-
-    initialize();
-  }, [user, axiosSecure, setValue]);
-
-  const onSubmit = async (data) => {
-    try {
-      const res = await axiosSecure.post("/posts", {
-        ...data,
-        tag: data.tag.value,
-      });
-
-      if (res.data.success) {
-        toast.success("Post added successfully!");
-        const newCount = postCount + 1;
-        setPostCount(newCount);
-
-        if (!isMember && newCount >= MAX_FREE_POSTS) {
-          setShowLimitMessage(true);
-        }
-      } else {
-        toast.error(res.data.message || "Failed to add post");
-      }
-    } catch (err) {
-      console.error("Post error:", err);
-      toast.error(err.response?.data?.message || "Failed to add post");
-    }
-  };
-
-  if (isLoading) {
+  if (userLoading || postsLoading) {
     return (
       <div className="flex justify-center items-center h-64">
         <span className="loading loading-spinner loading-lg"></span>
@@ -507,112 +254,51 @@ const AddPost = () => {
     );
   }
 
-  if (showLimitMessage) {
-    return (
-      <div className="max-w-2xl mx-auto p-6 mt-10 bg-white rounded-xl shadow-md text-center">
-        <h2 className="text-2xl font-bold mb-4 text-red-600">Post Limit Reached</h2>
-        <p className="mb-4 text-gray-700">
-          You've used all {MAX_FREE_POSTS} free posts. Upgrade to post unlimited content!
-        </p>
-        <Link to="/membership" className="btn btn-primary">
-          Become a Member
+  return (
+    <div className="max-w-3xl mx-auto p-6 mt-10 bg-white rounded-xl shadow-md">
+      <div className="text-center mb-8">
+        <img
+          src={userInfo.photoURL || user.photoURL}
+          alt="Profile"
+          className="w-24 h-24 rounded-full mx-auto"
+        />
+        <h2 className="text-2xl font-bold mt-4">{userInfo.displayName || user.displayName}</h2>
+        <p className="text-gray-600">{userInfo.email}</p>
+
+        {/* Badges */}
+        <div className="mt-4 space-x-2">
+          {userInfo.badge === "Gold" ? (
+            <span className="badge badge-warning text-white px-4 py-1">🏅 Gold Badge</span>
+          ) : (
+            <span className="badge badge-accent text-white px-4 py-1">🥉 Bronze Badge</span>
+          )}
+        </div>
+      </div>
+
+      {/* Recent Posts */}
+      <h3 className="text-xl font-semibold mb-4 border-b pb-2">My Recent Posts</h3>
+      <div className="space-y-4">
+        {recentPosts.length > 0 ? (
+          recentPosts.map((post) => (
+            <div key={post._id} className="p-4 border rounded-md">
+              <h4 className="text-lg font-bold text-blue-600">{post.title}</h4>
+              <p className="text-sm text-gray-600">{post.description}</p>
+              <p className="text-xs mt-1">Tag: {post.tag}</p>
+              <p className="text-xs text-gray-400">Date: {new Date(post.createdAt).toLocaleDateString()}</p>
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-500">You haven't posted anything yet.</p>
+        )}
+      </div>
+
+      <div className="mt-6 text-center">
+        <Link to="/posts" className="btn btn-outline btn-primary">
+          View All My Posts
         </Link>
       </div>
-    );
-  }
-
-  return (
-    <div className="max-w-2xl mx-auto p-6 mt-10 bg-white rounded-xl shadow-md">
-      <h2 className="text-2xl font-bold mb-6 text-center text-blue-600">
-        {isMember
-          ? `Welcome, Member! You have ${postCount} post${postCount === 1 ? "" : "s"}`
-          : `You've used ${postCount}/${MAX_FREE_POSTS} free posts`}
-      </h2>
-
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        {/* Author Info */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div>
-            <label className="label">Author Name</label>
-            <input
-              {...register("authorName")}
-              readOnly
-              className="input input-bordered w-full bg-gray-100"
-            />
-          </div>
-          <div>
-            <label className="label">Email</label>
-            <input
-              {...register("authorEmail")}
-              readOnly
-              className="input input-bordered w-full bg-gray-100"
-            />
-          </div>
-          <div>
-            <label className="label">Photo URL</label>
-            <input
-              {...register("authorImage")}
-              readOnly
-              className="input input-bordered w-full bg-gray-100"
-            />
-          </div>
-        </div>
-
-        {/* Post Title */}
-        <div>
-          <label className="label">Post Title*</label>
-          <input
-            {...register("title", { required: "Title is required" })}
-            className="input input-bordered w-full"
-            placeholder="Enter post title"
-          />
-          {errors.title && (
-            <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>
-          )}
-        </div>
-
-        {/* Description */}
-        <div>
-          <label className="label">Description*</label>
-          <textarea
-            {...register("description", { required: "Description is required" })}
-            className="textarea textarea-bordered w-full"
-            rows={5}
-            placeholder="Write your post content here..."
-          />
-          {errors.description && (
-            <p className="text-red-500 text-sm mt-1">{errors.description.message}</p>
-          )}
-        </div>
-
-        {/* Tag */}
-        <div>
-          <label className="label">Category*</label>
-          <Controller
-            name="tag"
-            control={control}
-            rules={{ required: "Please select a category" }}
-            render={({ field }) => (
-              <Select
-                {...field}
-                options={tagOptions}
-                className="react-select-container"
-                classNamePrefix="react-select"
-                placeholder="Select a category..."
-              />
-            )}
-          />
-          {errors.tag && (
-            <p className="text-red-500 text-sm mt-1">{errors.tag.message}</p>
-          )}
-        </div>
-
-        <button type="submit" className="btn btn-primary w-full mt-6">
-          Submit Post
-        </button>
-      </form>
     </div>
   );
 };
 
-export default AddPost;
+export default MyProfile;
