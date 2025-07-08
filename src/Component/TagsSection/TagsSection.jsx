@@ -22,9 +22,9 @@ const TagsSection = ({ onTagClick }) => {
   }
 
   return (
-    <div className="my-6 p-4 bg-gray-100 rounded-lg shadow">
+    <div className="my-6 p-4 bg-gray-100 rounded-lg shadow ">
       <h3 className="text-xl font-semibold mb-2">Browse by Tags:</h3>
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-wrap gap-3 items-center justify-center">
         {tags.map((tag) => (
           <button
             key={tag}

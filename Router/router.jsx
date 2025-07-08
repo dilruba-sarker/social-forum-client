@@ -13,6 +13,7 @@ import AddPost from "../src/Pages/Dashboard/AddPost/AddPost";
 import MyPosts from "../src/Pages/MyPosts/MyPosts";
 import Membership from "../src/Pages/Membership/Membership";
 import AllPosts from "../src/Pages/AllPosts/AllPosts";
+import PostDetails from "../src/Pages/PostDetails/PostDetails";
 export const router = createBrowserRouter([
   { path: "/",
      Component: Root ,
@@ -28,6 +29,10 @@ export const router = createBrowserRouter([
          },{
           path:'allpost',
           element:<AllPosts></AllPosts>
+         },{
+
+          path:'post/:id',
+          element:<PostDetails></PostDetails>
          },
          {
           path:'/membership',
