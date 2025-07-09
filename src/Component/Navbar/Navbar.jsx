@@ -4,6 +4,7 @@ import { Link, NavLink } from 'react-router'; // FIXED
 // adjust if needed
 import { FaUserCircle } from 'react-icons/fa';
 import { AuthContext } from '../../context/AuthContext';
+import CountAnnouncement from '../CountAnnouncement';
 
 const Navbar = () => {
   const { user, logOut } = use(AuthContext);
@@ -18,7 +19,7 @@ const Navbar = () => {
     <>
       <li><NavLink to="/">Home</NavLink></li>
       <li><NavLink to="/membership">Membership</NavLink></li>
-      <li><NavLink to="/notifications">Notification</NavLink></li>
+      
     </>
   );
 
@@ -43,13 +44,13 @@ const Navbar = () => {
         <img src={logo} alt="logo" className="w-28 h-20" />
 
 
-        {user?.badge && (
+        {/* {user?.badge && (
  
     <p className="text-sm font-semibold text-yellow-600">
       🏅 {user.badge} Badge
     </p>
  
-)}
+)} */}
       </div>
 
       {/* Desktop Links */}
@@ -58,9 +59,18 @@ const Navbar = () => {
           {links}
         </ul>
       </div>
+<CountAnnouncement></CountAnnouncement>
+
 
       {/* Right Side - Auth */}
       <div className="navbar-end">
+        {user?.badge && (
+ 
+    <p className="text-sm font-semibold text-yellow-600 mr-4">
+      🏅 {user.badge} Badge
+    </p>
+ 
+)}
         {!user?.email ? (
           <Link to="/login">
             <button className="btn btn-primary">Join Us</button>
