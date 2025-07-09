@@ -2,13 +2,16 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 
 import { toast } from "react-hot-toast";
-import { useNavigate, Link } from "react-router";
+import { useNavigate, Link, useLocation } from "react-router";
 
 import { AuthContext } from "../../../context/AuthContext";
 import useAxios from "../../../hook/useAxios";
 import SocialLogin from "../../../Component/SocialLogin";
 
 const Login = () => {
+
+   const location=useLocation()
+  const from=location?.state?.from||'/'
   const { signInUser } = useContext(AuthContext);
   const navigate = useNavigate();
    const axiosSecure = useAxios();
@@ -27,7 +30,7 @@ const Login = () => {
       .then(() => {
         toast.success("Login successful!");
         reset();
-        navigate("/");
+         navigate(from)
       })
       .catch((err) => {
 

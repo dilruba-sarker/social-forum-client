@@ -1,6 +1,6 @@
 import React, { use } from "react";
 
-import {  useNavigate } from "react-router";
+import {  useLocation, useNavigate } from "react-router";
 import useAxios from "../hook/useAxios";
 import { AuthContext } from "../context/AuthContext";
 
@@ -9,15 +9,17 @@ const SocialLogin = () => {
   const { googleSignin } = use(AuthContext);
 
   const axiosSecure = useAxios();
-//   const location = useLocation();
-//   const from = location?.state?.from || "/";
+
+  // const from = location?.state?.from || "/";
+
+
   const navigate = useNavigate();
   const handleGoogleSignin = () => {
     googleSignin()
       .then(async (result) => {
         const user = result?.user;
         console.log("Google Sign-in successful:", user?.email);
-
+navigate("/")
         const userInfo = {
           email: user?.email,
           displayName: user?.displayName || "User",
@@ -30,10 +32,10 @@ const SocialLogin = () => {
         };
 
         const resUsr = await axiosSecure.post("/users", userInfo);
-        console.log("User saved:", resUsr.data);
+    
 
-       
-           navigate("/");
+      
+          console.log("resUsr",resUsr )
       })
       .catch((err) => {
  

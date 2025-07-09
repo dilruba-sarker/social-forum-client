@@ -16,6 +16,11 @@ import AllPosts from "../src/Pages/AllPosts/AllPosts";
 import PostDetails from "../src/Pages/PostDetails/PostDetails";
 import CommentCount from "../src/Component/CommentCount";
 import ReportComments from "../src/Component/ReportComments";
+import PrivateRoute from "../src/Component/PrivateRoute/PrivateRoute";
+import ManageUsers from "../src/Pages/Dashboard/ManageUsers/ManageUsers";
+import AdminProfile from "../src/Pages/Dashboard/AdminProfile/AdminProfile";
+import ReportedComments from "../src/Pages/Dashboard/ReportedComments/ReportedComments";
+import MakeAnnouncement from "../src/Pages/Dashboard/MakeAnnouncement/MakeAnnouncement";
 
 export const router = createBrowserRouter([
   { path: "/",
@@ -51,7 +56,7 @@ export const router = createBrowserRouter([
     
     },{
        path:"/dashboard",
-    element:<DashboardLayout></DashboardLayout>,
+    element: <PrivateRoute> <DashboardLayout></DashboardLayout>, </PrivateRoute>  ,
     children:[
       {
       path:"MyProfile",
@@ -64,7 +69,19 @@ export const router = createBrowserRouter([
       {
       path:"MyPosts",
       element:<MyPosts></MyPosts>
-    },
+    },{
+      path:'MakeAdmin',
+      element:<ManageUsers></ManageUsers>
+    },{
+      path:"AdminProfile",
+      element:<AdminProfile></AdminProfile>
+    },{
+      path:"ReportedComments",
+      element:<ReportedComments></ReportedComments>
+    },{
+      path:"MakeAnnouncement",
+      element:<MakeAnnouncement></MakeAnnouncement>
+    }
   ]
     }
 ]);

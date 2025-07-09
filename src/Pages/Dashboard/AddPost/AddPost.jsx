@@ -1,14 +1,11 @@
 
-
-
 // import React, { useContext, useEffect, useState } from "react";
-// import { useForm, Controller } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 // import Select from "react-select";
 // import { toast } from "react-hot-toast";
 // import { Link } from "react-router";
 // import { AuthContext } from "../../../context/AuthContext";
 // import useAxios from "../../../hook/useAxios";
-
 
 // const tagOptions = [
 //   { value: "Technology", label: "Technology" },
@@ -26,37 +23,40 @@
 //   const [isLoading, setIsLoading] = useState(true);
 //   const [showLimitMessage, setShowLimitMessage] = useState(false);
 //   const [isMember, setIsMember] = useState(false);
+//   const [selectedTag, setSelectedTag] = useState(null);
 
 //   const {
 //     register,
 //     handleSubmit,
-//     control,
 //     setValue,
+
+//     watch,
 //     formState: { errors },
-//   } = useForm();
+//   } = useForm({
+//     defaultValues: {
+//       tag: ""
+//     }
+//   });
 
 //   // Initialize user role and post count
 //   useEffect(() => {
 //     const initialize = async () => {
 //       if (user?.email) {
 //         try {
-//           // 1. Pre-fill form
 //           setValue("authorName", user.displayName || "");
 //           setValue("authorEmail", user.email || "");
 //           setValue("authorImage", user.photoURL || "");
 
-//           // 2. Get user from DB to check role
 //           const userRes = await axiosSecure.get(`/users/${user.email}`);
 //           const dbUser = userRes.data;
-//           const member = dbUser.role === "member";
+//           const member = dbUser.
+// badge === "Gold";
 //           setIsMember(member);
 
-//           // 3. Count posts
 //           const countRes = await axiosSecure.get(`/posts/count?email=${user.email}`);
 //           const count = countRes.data.count;
 //           setPostCount(count);
 
-//           // 4. If not member and post count exceeded
 //           if (!member && count >= MAX_FREE_POSTS) {
 //             setShowLimitMessage(true);
 //           }
@@ -74,15 +74,14 @@
 
 //   const onSubmit = async (data) => {
 //     try {
-//       const res = await axiosSecure.post("/posts", {
-//         ...data,
-//         tag: data.tag.value,
-//       });
+//       const res = await axiosSecure.post("/posts", data);
 
 //       if (res.data.success) {
 //         toast.success("Post added successfully!");
 //         const newCount = postCount + 1;
 //         setPostCount(newCount);
+
+//         setSelectedTag(null);
 
 //         if (!isMember && newCount >= MAX_FREE_POSTS) {
 //           setShowLimitMessage(true);
@@ -185,19 +184,21 @@
 //         {/* Tag */}
 //         <div>
 //           <label className="label">Category*</label>
-//           <Controller
-//             name="tag"
-//             control={control}
-//             rules={{ required: "Please select a category" }}
-//             render={({ field }) => (
-//               <Select
-//                 {...field}
-//                 options={tagOptions}
-//                 className="react-select-container"
-//                 classNamePrefix="react-select"
-//                 placeholder="Select a category..."
-//               />
-//             )}
+//           <Select
+//             options={tagOptions}
+//             value={tagOptions.find(option => option.value === watch("tag"))}
+//             onChange={(selectedOption) => {
+//               setSelectedTag(selectedOption);
+//               setValue("tag", selectedOption?.value || "", { shouldValidate: true });
+//             }}
+//             placeholder="Select a category..."
+//           />
+//           <input
+//             type="hidden"
+//             {...register("tag", {
+//               required: "Please select a category",
+//               validate: value => value !== "" || "Please select a category"
+//             })}
 //           />
 //           {errors.tag && (
 //             <p className="text-red-500 text-sm mt-1">{errors.tag.message}</p>
@@ -213,47 +214,57 @@
 // };
 
 // export default AddPost;
-import React, { useContext, useEffect, useState } from "react";
+
+// import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Select from "react-select";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router";
+import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../../../context/AuthContext";
+
+import { useContext, useEffect, useState } from "react";
 import useAxios from "../../../hook/useAxios";
-
-
-const tagOptions = [
-  { value: "Technology", label: "Technology" },
-  { value: "Health", label: "Health" },
-  { value: "Education", label: "Education" },
-  { value: "Entertainment", label: "Entertainment" },
-];
 
 const MAX_FREE_POSTS = 5;
 
 const AddPost = () => {
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxios();
+
   const [postCount, setPostCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [showLimitMessage, setShowLimitMessage] = useState(false);
-  const [isMember, setIsMember] = useState(false);
+  const [userRole, setUserRole] = useState(""); // Track user role
   const [selectedTag, setSelectedTag] = useState(null);
+
+  // Fetch tag options from backend
+  const { data: rawTags = [], isLoading: tagsLoading } = useQuery({
+    queryKey: ["allTags"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/tags");
+      return res.data;
+    },
+  });
+
+  const tagOptions = rawTags.map((tag) => ({
+    value: tag.name,
+    label: tag.name,
+  }));
 
   const {
     register,
     handleSubmit,
     setValue,
-
     watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      tag: ""
-    }
+      tag: "",
+    },
   });
 
-  // Initialize user role and post count
+  // Initialize: get user role and post count
   useEffect(() => {
     const initialize = async () => {
       if (user?.email) {
@@ -264,18 +275,19 @@ const AddPost = () => {
 
           const userRes = await axiosSecure.get(`/users/${user.email}`);
           const dbUser = userRes.data;
-          const member = dbUser.role === "member";
-          setIsMember(member);
+          const role = dbUser?.role;
+          console.log("User role:", role);
+          setUserRole(role);
 
           const countRes = await axiosSecure.get(`/posts/count?email=${user.email}`);
           const count = countRes.data.count;
           setPostCount(count);
 
-          if (!member && count >= MAX_FREE_POSTS) {
+          if ((role !== "admin" && role !== "member") && count >= MAX_FREE_POSTS) {
             setShowLimitMessage(true);
           }
         } catch (err) {
-          console.error("Init error:", err);
+          console.error("Initialization error:", err);
           toast.error("Failed to load user info");
         } finally {
           setIsLoading(false);
@@ -289,15 +301,13 @@ const AddPost = () => {
   const onSubmit = async (data) => {
     try {
       const res = await axiosSecure.post("/posts", data);
-
       if (res.data.success) {
         toast.success("Post added successfully!");
         const newCount = postCount + 1;
         setPostCount(newCount);
-     
         setSelectedTag(null);
 
-        if (!isMember && newCount >= MAX_FREE_POSTS) {
+        if ((userRole !== "admin" && userRole !== "member") && newCount >= MAX_FREE_POSTS) {
           setShowLimitMessage(true);
         }
       } else {
@@ -309,7 +319,7 @@ const AddPost = () => {
     }
   };
 
-  if (isLoading) {
+  if (isLoading || tagsLoading) {
     return (
       <div className="flex justify-center items-center h-64">
         <span className="loading loading-spinner loading-lg"></span>
@@ -334,8 +344,8 @@ const AddPost = () => {
   return (
     <div className="max-w-2xl mx-auto p-6 mt-10 bg-white rounded-xl shadow-md">
       <h2 className="text-2xl font-bold mb-6 text-center text-blue-600">
-        {isMember
-          ? `Welcome, Member! You have ${postCount} post${postCount === 1 ? "" : "s"}`
+        {userRole === "admin" || userRole === "member"
+          ? `Welcome, ${userRole === "admin" ? "Admin" : "Member"}! You have ${postCount} post${postCount === 1 ? "" : "s"}`
           : `You've used ${postCount}/${MAX_FREE_POSTS} free posts`}
       </h2>
 
@@ -368,7 +378,7 @@ const AddPost = () => {
           </div>
         </div>
 
-        {/* Post Title */}
+        {/* Title */}
         <div>
           <label className="label">Post Title*</label>
           <input
@@ -395,23 +405,25 @@ const AddPost = () => {
           )}
         </div>
 
-        {/* Tag */}
+        {/* Category Tag */}
         <div>
           <label className="label">Category*</label>
           <Select
             options={tagOptions}
-            value={tagOptions.find(option => option.value === watch("tag"))}
+            value={tagOptions.find((option) => option.value === watch("tag"))}
             onChange={(selectedOption) => {
               setSelectedTag(selectedOption);
-              setValue("tag", selectedOption?.value || "", { shouldValidate: true });
+              setValue("tag", selectedOption?.value || "", {
+                shouldValidate: true,
+              });
             }}
             placeholder="Select a category..."
           />
           <input
             type="hidden"
-            {...register("tag", { 
+            {...register("tag", {
               required: "Please select a category",
-              validate: value => value !== "" || "Please select a category"
+              validate: (value) => value !== "" || "Please select a category",
             })}
           />
           {errors.tag && (
