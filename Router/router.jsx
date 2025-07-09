@@ -14,6 +14,9 @@ import MyPosts from "../src/Pages/MyPosts/MyPosts";
 import Membership from "../src/Pages/Membership/Membership";
 import AllPosts from "../src/Pages/AllPosts/AllPosts";
 import PostDetails from "../src/Pages/PostDetails/PostDetails";
+import CommentCount from "../src/Component/CommentCount";
+import ReportComments from "../src/Component/ReportComments";
+
 export const router = createBrowserRouter([
   { path: "/",
      Component: Root ,
@@ -33,6 +36,12 @@ export const router = createBrowserRouter([
 
           path:'post/:id',
           element:<PostDetails></PostDetails>
+         },{
+          path:"CommentCount",
+          element:<CommentCount></CommentCount>
+         },{
+          path:"comments/:postId",
+          element:<ReportComments></ReportComments>
          },
          {
           path:'/membership',

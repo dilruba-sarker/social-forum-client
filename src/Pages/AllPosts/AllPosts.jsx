@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router";
 import useAxios from "../../hook/useAxios";
+import CommentCount from "../../Component/CommentCount";
 
 const AllPosts = () => {
   const axiosSecure = useAxios();
@@ -122,6 +123,8 @@ const AllPosts = () => {
                   <span>👍 Upvotes: {post.upVote || 0}</span>
                   <span>👎 Downvotes: {post.downVote || 0}</span>
                   <span>🗳️ Total Votes: {(post.upVote || 0) - (post.downVote || 0)}</span>
+            
+                  <CommentCount postId={post._id} />
                 </div>
               </div>
             ))
