@@ -6,18 +6,24 @@ import { AuthContext } from "../context/AuthContext";
 
 
 const SocialLogin = () => {
-  const { googleSignin } = use(AuthContext);
+  const { googleSignin,user } = use(AuthContext);
 
   const axiosSecure = useAxios();
 
   // const from = location?.state?.from || "/";
 
-
+ 
   const navigate = useNavigate();
   const handleGoogleSignin = () => {
     googleSignin()
       .then(async (result) => {
         const user = result?.user;
+    
+
+const token = user?.accessToken;
+// const token =  result.user.getIdToken();
+console.log("token", token)
+localStorage.setItem("access-token", token);
         console.log("Google Sign-in successful:", user?.email);
 navigate("/")
         const userInfo = {

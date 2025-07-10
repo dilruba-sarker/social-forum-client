@@ -1,20 +1,22 @@
-import React, { useContext } from "react";
+import React, { use, useContext } from "react";
 import { useForm } from "react-hook-form";
 
 import { toast } from "react-hot-toast";
 import { useNavigate, Link, useLocation } from "react-router";
 
 import { AuthContext } from "../../../context/AuthContext";
-import useAxios from "../../../hook/useAxios";
+
 import SocialLogin from "../../../Component/SocialLogin";
+import useAxios from "../../../hook/useAxios";
 
 const Login = () => {
-
+const {user}=use(AuthContext)
+  const axiosSecure = useAxios();
    const location=useLocation()
   const from=location?.state?.from||'/'
   const { signInUser } = useContext(AuthContext);
   const navigate = useNavigate();
-   const axiosSecure = useAxios();
+ 
 
   const {
     register,
@@ -27,8 +29,22 @@ const Login = () => {
     const { email, password } = data;
 
     signInUser(email, password)
-      .then(() => {
+      .then((result) => {
+const user = result.user;
+
+const token = user?.accessToken;
+// const token =  result.user.getIdToken();
+console.log("token", token)
+localStorage.setItem("access-token", token);
+
+// const  email= user?.email ;
+//  const resUsr = await axiosSecure.post("/users", email);
+    
+// console.log(resUsr)
+      
+           console.log("resUsr",user )
         toast.success("Login successful!");
+        
         reset();
          navigate(from)
       })

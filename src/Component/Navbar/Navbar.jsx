@@ -1,6 +1,6 @@
 import React, { use } from 'react';
 import logo from "../../assets/Untitled (150 x 150 px) (5).png";
-import { Link, NavLink } from 'react-router'; // FIXED
+import { Link, NavLink, useNavigate } from 'react-router'; // FIXED
 // adjust if needed
 import { FaUserCircle } from 'react-icons/fa';
 import { AuthContext } from '../../context/AuthContext';
@@ -8,13 +8,22 @@ import CountAnnouncement from '../CountAnnouncement';
 
 const Navbar = () => {
   const { user, logOut } = use(AuthContext);
-
-  const handleLogout = () => {
-    logOut()
-      .then(() => console.log("Logged out"))
-      .catch((err) => console.error(err));
-  };
-
+const navigate =useNavigate()
+  // const handleLogout = () => {
+  //   logOut()
+  //     .then(() => console.log("Logged out"))
+  //     .catch((err) => console.error(err));
+  // };
+const handleLogout = () => {
+  logOut()
+    .then(() => {
+      localStorage.removeItem("access-token"); // ✅ Remove token
+      navigate("/"); // or homepage
+    })
+    .catch((error) => {
+      console.error("Logout failed:", error);
+    });
+};
   const links = (
     <>
       <li><NavLink to="/">Home</NavLink></li>
@@ -44,13 +53,7 @@ const Navbar = () => {
         <img src={logo} alt="logo" className="w-28 h-20" />
 
 
-        {/* {user?.badge && (
- 
-    <p className="text-sm font-semibold text-yellow-600">
-      🏅 {user.badge} Badge
-    </p>
- 
-)} */}
+       
       </div>
 
       {/* Desktop Links */}

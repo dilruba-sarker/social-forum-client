@@ -1,16 +1,18 @@
-import React from "react";
+import React, { use } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "../../hook/useAxios";
+import { AuthContext } from "../../context/AuthContext";
 // Adjust path based on your structure
 
 const TagsSection = () => {
   const axiosSecure = useAxios();
-
+const {user}=use(AuthContext)
+//  console.log("aaaa", user?.accessToken)
   const { data: tags = [], isLoading, error } = useQuery({
     queryKey: ["allTags"],
     queryFn: async () => {
       const res = await axiosSecure.get("/tags");
-      console.log("resss", res.data)
+      // console.log("resss", res.data)
       return res.data;
     },
   });
