@@ -19,11 +19,12 @@
 // export default Home;
 
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import AllPosts from '../AllPosts/AllPosts';
 import TagsSection from '../../Component/TagsSection/TagsSection';
 import AllAnnouncements from '../../Component/AllAnnouncements';
 import Banner from '../../Component/BannerWithSearch/Banner';
+
 
 const Home = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -32,10 +33,12 @@ const Home = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     setSearchTerm(searchInput); // ✅ triggers filtered search
+     setSearchInput("")
+   
   };
 
   return (
-    <div>
+    <div className=''>
       <Banner
         searchInput={searchInput}
         setSearchInput={setSearchInput}
@@ -44,6 +47,7 @@ const Home = () => {
       <TagsSection />
       <AllAnnouncements />
       <AllPosts searchTerm={searchTerm} />
+     
     </div>
   );
 };
