@@ -7,7 +7,8 @@ import PaymentForm from '../../PaymentForm';
 const stripePromise=loadStripe(import.meta.env.VITE_SERVICE_KEY)
 const Membership = () => {
     return (
-        <div>
+        // <div className='max-h-10vh'>
+            <div className="min-h-screen bg-gray-50 py-10 px-4">
              <Elements stripe={stripePromise}>
       <PaymentForm></PaymentForm>
     </Elements>
