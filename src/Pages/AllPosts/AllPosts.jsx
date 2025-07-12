@@ -299,7 +299,7 @@ const AllPosts = ({ searchTerm }) => {
   }, [isLoading, posts.length]);
 
   return (
-    <div ref={postsRef} className="max-w-6xl mx-auto px-4 py-10">
+    <div ref={postsRef} className="max-w-6xl bg-blue-300 mx-auto px-4 py-10">
       <h2 className="text-3xl font-bold mb-6">All Posts</h2>
 
       <div className="flex justify-end mb-6 space-x-2">
@@ -361,7 +361,8 @@ const AllPosts = ({ searchTerm }) => {
             ))}
           </div>
 
-          <div className="mt-10 flex justify-center gap-2">
+          {/* <div className="mt-10 flex justify-center gap-2"> */}
+          <div className="mt-10 flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 lg:gap-5">
             <button
               className="btn btn-sm"
               onClick={() => goToPage(currentPage - 1)}

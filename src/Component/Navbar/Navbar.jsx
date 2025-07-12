@@ -9,11 +9,7 @@ import CountAnnouncement from '../CountAnnouncement';
 const Navbar = () => {
   const { user, logOut } = use(AuthContext);
 const navigate =useNavigate()
-  // const handleLogout = () => {
-  //   logOut()
-  //     .then(() => console.log("Logged out"))
-  //     .catch((err) => console.error(err));
-  // };
+ 
 const handleLogout = () => {
   logOut()
     .then(() => {
@@ -26,14 +22,20 @@ const handleLogout = () => {
 };
   const links = (
     <>
-      <li><NavLink to="/">Home</NavLink></li>
-      <li><NavLink to="/membership">Membership</NavLink></li>
+      <li className='text-xl font-bold  mr-1'><NavLink to="/" className={({ isActive }) =>
+      isActive ? "bg-blue-500 text-white px-3 py-1 rounded" : "px-3 py-1"
+    }>Home</NavLink></li>
+      <li className='text-xl font-bold '><NavLink to="/membership"
+      
+      className={({ isActive }) =>
+      isActive ? "bg-blue-500 text-white px-3 py-1 rounded" : "px-3 py-1"
+    }>Membership</NavLink></li>
       
     </>
   );
 
   return (
-    <div className="navbar bg-base-100 shadow-sm px-4">
+    <div className="navbar bg-red-100 shadow-sm px-4 static">
       <div className="navbar-start">
         {/* Mobile Dropdown */}
         <div className="dropdown">

@@ -19,11 +19,11 @@ const AllAnnouncements = () => {
   if (!announcements.length) return null; // hide section if no announcements
 
   return (
-    <div className="max-w-4xl mx-auto mt-8">
+    <div className="max-w-5xl py-2 mx-auto mt-8">
       <h2 className="text-xl font-semibold mb-4">📢 Latest Announcements ({announcements.length})</h2>
       <div className="space-y-4">
         {announcements.map((item) => (
-          <div key={item._id} className="border rounded p-4 shadow">
+          <div key={item._id} className="border bg-red-100 rounded p-4 shadow">
             <div className="flex items-center gap-2 mb-2">
               <img src={item.authorImage} alt="" className="w-8 h-8 rounded-full" />
               <div>
