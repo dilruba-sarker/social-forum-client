@@ -136,7 +136,7 @@ const MyPosts = () => {
   const currentPosts = myPosts.slice(startIndex, startIndex + POSTS_PER_PAGE);
 
   return (
-    <div className="max-w-5xl mx-auto p-6">
+    <div className="max-w-5xl mx-auto ">
       <h2 className="text-2xl font-bold mb-6">My Posts</h2>
 
       {myPosts.length === 0 ? (
