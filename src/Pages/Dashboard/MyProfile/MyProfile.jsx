@@ -53,9 +53,9 @@ const MyProfile = () => {
 
           <div className="mt-2">
             {badge === "Gold" ? (
-              <span className="badge badge-warning text-white">🏅 Gold Member</span>
+              <span className="badge badge-warning text-white">🏅 Gold Badge</span>
             ) : (
-              <span className="badge badge-bronze bg-amber-600 text-white">🥉 Bronze</span>
+              <span className="badge badge-bronze bg-amber-600 text-white">🥉 Bronze Badge</span>
             )}
           </div>
         </div>

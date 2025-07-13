@@ -62,7 +62,18 @@ const DashboardLayout = () => {
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
+          {/* <li>
+            <NavLink to="/dashboard/MyProfile">My Profile</NavLink>
+          </li>
           <li>
+            <NavLink to="/dashboard/AddPost">Add Post</NavLink>
+          </li>
+          <li>
+            <NavLink to="/dashboard/MyPosts">My Posts</NavLink>
+          </li> */}
+         {!isRoleLoading && role ==="member" || role==="user" &&<>
+         
+         <li>
             <NavLink to="/dashboard/MyProfile">My Profile</NavLink>
           </li>
           <li>
@@ -71,9 +82,9 @@ const DashboardLayout = () => {
           <li>
             <NavLink to="/dashboard/MyPosts">My Posts</NavLink>
           </li>
-         
+         </>}
 
-          {!isRoleLoading && role ==="admin"&&<>
+          {!isRoleLoading && role ==="admin" &&<>
           
            <li>
             <NavLink to="/dashboard/MakeAdmin">Manage Users</NavLink>

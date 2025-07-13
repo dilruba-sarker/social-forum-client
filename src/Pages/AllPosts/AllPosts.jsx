@@ -327,7 +327,40 @@ const AllPosts = ({ searchTerm }) => {
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {posts.map((post) => (
-              <div
+              // <div
+              //   key={post._id}
+              //   className="p-6 bg-white rounded-lg shadow hover:shadow-lg transition"
+              // >
+              //   <div className="flex items-center gap-4 mb-4">
+              //     <img
+              //       src={post.authorImage}
+              //       alt={post.authorName}
+              //       className="w-10 h-10 rounded-full"
+              //     />
+              //     <div>
+              //       <p className="font-semibold">{post.authorName}</p>
+              //       <p className="text-xs text-gray-500">
+              //         {new Date(post.createdAt).toLocaleString()}
+              //       </p>
+              //     </div>
+              //   </div>
+              //   <Link
+              //     to={`/post/${post._id}`}
+              //     className="text-xl font-bold text-blue-600 mb-2 hover:underline block"
+              //   >
+              //     {post.title}
+              //   </Link>
+              //   <p className="text-sm text-gray-600 mb-2">Tag: {post.tag}</p>
+              //   <div className="flex flex-wrap items-center text-sm text-gray-600 gap-4 mt-3">
+              //     <span>👍 Upvotes: {post.upVote || 0}</span>
+              //     <span>👎 Downvotes: {post.downVote || 0}</span>
+              //     <span>🗳️ Total Votes: {(post.upVote || 0) - (post.downVote || 0)}</span>
+              //     <CommentCount postId={post._id} />
+              //   </div>
+              // </div>
+
+              <Link  to={`/post/${post._id}`} key={post._id}>
+   <div
                 key={post._id}
                 className="p-6 bg-white rounded-lg shadow hover:shadow-lg transition"
               >
@@ -344,12 +377,12 @@ const AllPosts = ({ searchTerm }) => {
                     </p>
                   </div>
                 </div>
-                <Link
+                {/* <Link
                   to={`/post/${post._id}`}
                   className="text-xl font-bold text-blue-600 mb-2 hover:underline block"
                 >
                   {post.title}
-                </Link>
+                </Link> */}
                 <p className="text-sm text-gray-600 mb-2">Tag: {post.tag}</p>
                 <div className="flex flex-wrap items-center text-sm text-gray-600 gap-4 mt-3">
                   <span>👍 Upvotes: {post.upVote || 0}</span>
@@ -358,6 +391,7 @@ const AllPosts = ({ searchTerm }) => {
                   <CommentCount postId={post._id} />
                 </div>
               </div>
+              </Link>
             ))}
           </div>
 
