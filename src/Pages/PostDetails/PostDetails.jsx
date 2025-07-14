@@ -162,7 +162,7 @@ const PostDetails = () => {
        {user ? (
   <div className="flex gap-4">
  <FacebookShareButton 
-  url={`http://localhost:5173/post/${id}`} 
+  url={`https://social-forum-83088.web.app/post/${id}`} 
   quote={`${post.title}`}
   hashtag={`#${post.tag}`} // Optional: add tag as hashtag
   className="flex items-center justify-center"

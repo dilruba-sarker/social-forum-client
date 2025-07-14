@@ -1,10 +1,10 @@
-# DevTalk Forum
+# Social Forum
 
 An interactive MERN stack-based forum where users can post, comment, vote, and engage in topic-based discussions. Designed with recruiters in mind, this forum emphasizes a clean, scalable structure, accessibility, performance, and responsiveness.
 
 ## 🌐 Live URL
 
-👉 [https://devtalk-forum.web.app](https://devtalk-forum.web.app)
+👉 [https://social-forum.web.app](https://social-forum-83088.web.app)
 
 ## 🎯 Project Objective
 
