@@ -3,7 +3,7 @@ import React from "react";
 import bg from '../../assets/bg.png'
 const Banner = ({ searchInput, setSearchInput, handleSearch }) => {
   return (
-    <div className="bg-blue-100 py-10 px-4 mb-10 mt-10 h-64" style={{backgroundImage:`url(${bg})`}}>
+    <div className="bg-blue-100 py-10 px-4 mb-10  h-64" style={{backgroundImage:`url(${bg})`}}>
       <h1 className="text-3xl font-bold text-center text-amber-50 mb-4">Discover Posts by Tag</h1>
       <form
         onSubmit={handleSearch}

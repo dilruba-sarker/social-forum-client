@@ -23,7 +23,7 @@ const AllAnnouncements = () => {
       <h2 className="text-xl font-semibold mb-4">📢 Latest Announcements ({announcements.length})</h2>
       <div className="space-y-4">
         {announcements.map((item) => (
-          <div key={item._id} className="border bg-red-100 rounded p-4 shadow">
+          <div key={item._id} className=" bg-cyan-100 rounded p-4 shadow shadow-blue-300">
             <div className="flex items-center gap-2 mb-2">
               <img src={item.authorImage} alt="" className="w-8 h-8 rounded-full" />
               <div>
