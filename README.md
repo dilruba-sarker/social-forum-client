@@ -58,6 +58,40 @@ To build a real-world, scalable forum platform that allows users to:
 - **Stripe Payment API**
 - **dotenv**
 - **CORS**
+## 🛠 How to Run Locally
+
+### Prerequisites
+- Node.js (v16+ recommended)
+- npm (comes with Node)
+- Git
+- MongoDB (local, Atlas,)
+- Firebase project (for authentication)
+
+---
+
+### 1) Clone the repository
+```bash
+git clone https://github.com/<your-username>/<repo-name>.git
+cd <repo-name>
+---
+
+### 2️⃣ Create environment files
+
+**Client (`client/.env`)**  
+
+### 3) Install dependencies
+Client and Server
+## 4) Run the app
+Server:
+cd server
+npm run dev
+Client:
+cd client
+npm run dev
+---
+
+
+
 
 ## 🔐 Security
 
