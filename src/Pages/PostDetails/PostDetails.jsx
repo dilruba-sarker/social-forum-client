@@ -212,30 +212,7 @@ const PostDetails = () => {
         ) : comments.length === 0 ? (
           <p>No comments yet.</p>
         ) : (
-//           comments.map((comment) => (
-//             <div
-//               key={comment._id}
-//               className="mb-4 p-4 border rounded bg-gray-50"
-//             >
-//               <div className="flex items-center mb-2">
-//                 {comment.authorImage && (
-//                   <img
-//                     src={comment.authorImage}
-//                     alt={comment.authorName}
-//                     className="w-8 h-8 rounded-full mr-2"
-//                   />
-//                 )}
-//                 <span className="font-semibold"> {comment.authorName}</span>
-//                 <span className="font-semibold ml-2">{comment.
-// authorEmail}</span>
-//                 <span className="ml-auto text-xs text-gray-500">
-//                   {new Date(comment.createdAt).toLocaleString()}
-//                 </span>
-//               </div>
-//               <p>{comment.commentText}</p>
-//             </div>
-//           ))
-//  <ReportComments postId={post._id} /> 
+
  <ReportComments postId={post._id}   comments={comments}    loading={commentsLoading} refetch={refetchComments}/>
 
         )}
