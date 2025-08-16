@@ -98,7 +98,7 @@ const AllPosts = ({ searchTerm }) => {
                     className="w-10 h-10 rounded-full"
                   />
                   <div>
-                    <p className="font-semibold">{post.authorName}</p>
+                    <p className="font-semibold text-black">{post.authorName}</p>
                     <p className="text-xs text-gray-500">
                       {new Date(post.createdAt).toLocaleString()}
                     </p>
