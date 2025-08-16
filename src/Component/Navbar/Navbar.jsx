@@ -27,7 +27,7 @@ const Navbar = () => {
         <NavLink
           to="/"
           className={({ isActive }) =>
-            isActive ? "bg-blue-500 text-white px-3 py-1 rounded" : "text-black px-3 py-1"
+            isActive ? "bg-indigo-700 text-white px-3 py-1 rounded" : "text-black px-3 py-1"
           }
         >
           Home
@@ -37,17 +37,44 @@ const Navbar = () => {
         <NavLink
           to="/membership"
           className={({ isActive }) =>
-            isActive ? "bg-blue-500 text-white px-3 py-1 rounded" : "text-black px-3 py-1"
+            isActive ? "bg-indigo-700 text-white px-3 py-1 rounded" : "text-black px-3 py-1"
           }
         >
           Membership
         </NavLink>
       </li>
+      <li className="text-xl font-bold">
+        <NavLink
+          to="/policy"
+          className={({ isActive }) =>
+            isActive ? "bg-indigo-700 text-white px-3 py-1 rounded" : "text-black px-3 py-1"
+          }
+        >
+          Privecy policy
+        </NavLink>
+      </li>
+      
+      {
+        user?.email &&(<>
+        
+<li className="text-xl font-bold">
+        <NavLink
+          to="/about"
+          className={({ isActive }) =>
+            isActive ? "bg-indigo-700 text-white px-3 py-1 rounded" : "text-black px-3 py-1"
+          }
+        >
+         About Us
+        </NavLink>
+      </li>
+
+        </>)
+      }
     </>
   );
 
   return (
-    <div className="navbar bg-cyan-100 shadow-sm  max-w-full sticky top-0 z-50">
+    <div className="navbar bg-blue-50 shadow-sm  max-w-full sticky top-0 z-50">
       <div className="navbar-start">
         {/* Mobile Dropdown */}
         <div className="dropdown">

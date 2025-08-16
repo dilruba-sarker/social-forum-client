@@ -81,7 +81,7 @@ const AllPosts = ({ searchTerm }) => {
         <p className="text-center text-gray-500">No posts found.</p>
       ) : (
         <>
-          <div className=" flex flex-col gap-4 ">
+          <div className=" grid md:grid-cols-2 lg:grid-cols-2 gap-4 ">
             {posts.map((post) => (
               
               
@@ -89,7 +89,7 @@ const AllPosts = ({ searchTerm }) => {
               <Link  to={`/post/${post._id}`} key={post._id}>
    <div
                 key={post._id}
-                className="p-6 bg-white rounded-lg shadow hover:shadow-lg transition"
+                className="p-6 bg-gray-200 rounded-lg shadow shadow-blue-300 hover:shadow-lg transition"
               >
                 <div className="flex items-center gap-4 mb-4">
                   <img

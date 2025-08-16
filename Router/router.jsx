@@ -21,10 +21,14 @@ import ManageUsers from "../src/Pages/Dashboard/ManageUsers/ManageUsers";
 import AdminProfile from "../src/Pages/Dashboard/AdminProfile/AdminProfile";
 import ReportedComments from "../src/Pages/Dashboard/ReportedComments/ReportedComments";
 import MakeAnnouncement from "../src/Pages/Dashboard/MakeAnnouncement/MakeAnnouncement";
+import ErrorPage from "../src/Component/ErrorPage/ErrorPage";
+import PrivacyPolicy from "../src/Component/PrivacyPolicy/PrivacyPolicy";
+import AboutUs from "../src/Component/AboutUs/AboutUs";
 
 export const router = createBrowserRouter([
   { path: "/",
      Component: Root ,
+      errorElement: <ErrorPage />,
       children: [
          { index: true, Component: Home },
          {
@@ -51,6 +55,13 @@ export const router = createBrowserRouter([
          {
           path:'/membership',
           element:<Membership></Membership>
+         },{
+          path:'/policy',
+          element:<PrivateRoute> <PrivacyPolicy></PrivacyPolicy></PrivateRoute> 
+         },
+         {
+          path:'/about',
+          element:<PrivateRoute> <AboutUs></AboutUs></PrivateRoute> 
          },
       ]
     

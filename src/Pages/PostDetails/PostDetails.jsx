@@ -126,11 +126,11 @@ const PostDetails = () => {
       </div>
 
       {/* Post title and description */}
-      <h1 className="text-3xl font-bold text-blue-700 mb-4">{post.title}</h1>
+      <h1 className="text-3xl font-bold text-black mb-4">{post.title}</h1>
       <CommentCount postId={post._id} />
       <p className="text-gray-700 mb-6">{post.description}</p>
 
-      <p className="mb-4 text-sm text-white bg-blue-500 inline-block px-3 py-1 rounded-full">
+      <p className="mb-4 text-sm  bg-blue-100 text-black inline-block px-3 py-1 rounded-full">
         Tag: {post.tag}
       </p>
 
