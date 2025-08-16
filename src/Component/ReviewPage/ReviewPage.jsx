@@ -68,8 +68,8 @@ const Row = ({ items, prefix }) => (
 
 const ReviewPage = () => {
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-6 md:px-20">
-      <h1 className="text-3xl font-bold  text-gray-800 mb-10">
+    <div className="mt-12 bg-gray-50  px-6 md:px-20">
+      <h1 className="text-3xl font-bold text-center text-gray-800 mb-10">
         What People Say About Us ⭐
       </h1>
 

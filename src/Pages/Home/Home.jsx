@@ -7,6 +7,8 @@ import AllAnnouncements from '../../Component/AllAnnouncements';
 import Banner from '../../Component/BannerWithSearch/Banner';
 import ReviewPage from '../../Component/ReviewPage/ReviewPage';
 import NewsletterSection from '../../Component/NewsletterSection/NewsletterSection';
+import FeaturedPage from '../../Component/FeaturedPage/FeaturedPage';
+import RecentProductsPage from '../../Component/RecentProductsPage/RecentProductsPage';
 
 
 const Home = () => {
@@ -31,7 +33,10 @@ const Home = () => {
       <AllAnnouncements />
       <AllPosts searchTerm={searchTerm} />
       <ReviewPage></ReviewPage>
+      <FeaturedPage></FeaturedPage>
+      <RecentProductsPage></RecentProductsPage>
       <NewsletterSection></NewsletterSection>
+
      
     </div>
   );
