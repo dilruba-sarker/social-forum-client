@@ -34,8 +34,8 @@ const featuredItems = [
 
 const FeaturedPage = () => {
   return (
-    <div className="bg-gray-50 mt-12 mb-12 px-6 md:px-20">
-      <h1 className="text-4xl font-bold text-center text-gray-800 mb-12">
+    <div className="bg-gray-50 mt- mb-12 px-12 py-6 md:px-20">
+      <h1 className="text-3xl font-bold text-center text-gray-800 mb-12">
         🌟 Featured Highlights
       </h1>
 

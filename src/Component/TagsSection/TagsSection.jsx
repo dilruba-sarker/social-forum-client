@@ -22,7 +22,7 @@ const {user}=use(AuthContext)
 
   return (
     <div className="max-w-4xl mx-auto mt-8 p-4">
-      <h2 className="text-xl font-bold mb-4">All Tags</h2>
+      <h2 className="text-3xl text-center font-bold mb-8">All Tags</h2>
       {tags.length === 0 ? (
         <p>No tags found.</p>
       ) : (

@@ -66,7 +66,7 @@ export default function NewsletterSection({ bgImageUrl, onSubmitEmail }) {
 
   return (
     <section
-      className="relative w-full min-h-[70vh] grid place-items-center overflow-hidden"
+      className="relative w-full min-h-[70vh] mb-12 grid place-items-center overflow-hidden"
       role="region"
       aria-label="Newsletter sign up section"
     >

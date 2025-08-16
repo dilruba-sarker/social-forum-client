@@ -102,7 +102,7 @@ const PostDetails = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-64">
+      <div className="flex  justify-center items-center h-64">
         <span className="loading loading-spinner loading-lg"></span>
       </div>
     );
@@ -111,14 +111,14 @@ const PostDetails = () => {
   return (
     <div className="max-w-3xl mx-auto px-6 py-10 bg-white shadow-md rounded-xl mt-6">
       {/* Post author info */}
-      <div className="flex items-center gap-4 mb-6">
+      <div className="flex items-center gap-4 mb-6 text-black">
         <img
           src={post.authorImage}
           alt={post.authorName}
           className="w-14 h-14 rounded-full"
         />
         <div>
-          <p className="text-lg font-semibold">{post.authorName}</p>
+          <p className="text-lg text-black font-semibold">{post.authorName}</p>
           <p className="text-sm text-gray-500">
             {new Date(post.createdAt).toLocaleString()}
           </p>
@@ -143,7 +143,7 @@ const PostDetails = () => {
     if (!user) return toast.error("Please log in to upvote.");
     upvoteMutation.mutate();
   }}
-  className="btn btn-sm btn-outline"
+  className="btn btn-sm btn-outline text-black"
 >
   👍 Upvote ({post.upVote || 0})
 </button>
@@ -153,14 +153,14 @@ const PostDetails = () => {
     if (!user) return toast.error("Please log in to downvote.");
     downvoteMutation.mutate();
   }}
-  className="btn btn-sm btn-outline"
+  className="btn btn-sm btn-outline text-black"
 >
   👎 Downvote ({post.downVote || 0})
 </button>
 
 
        {user ? (
-  <div className="flex gap-4">
+  <div className="flex gap-4 text-black">
  <FacebookShareButton 
   url={`https://social-forum-83088.web.app/post/${id}`} 
   quote={`${post.title}`}
@@ -181,14 +181,15 @@ const PostDetails = () => {
 
       {/* Comments Section */}
       <div className="mt-10">
-        <h2 className="text-xl font-semibold mb-4">Comments</h2>
+        <h2 className="text-xl text-black font-semibold mb-4">Comments</h2>
 
         {/* Comment form */}
         {user ? (
           <form onSubmit={handleCommentSubmit} className="mb-6">
             <textarea
               rows={3}
-              className="w-full border p-3 rounded"
+             
+              className="w-full border p-3 rounded text-black"
               placeholder="Write a comment..."
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
@@ -196,7 +197,7 @@ const PostDetails = () => {
             />
             <button
               type="submit"
-              className="btn btn-primary mt-2"
+              className="btn text-black  btn-primary mt-2"
               disabled={addCommentMutation.isLoading || !commentText.trim()}
             >
               {addCommentMutation.isLoading ? "Posting..." : "Post Comment"}

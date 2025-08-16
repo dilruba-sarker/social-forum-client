@@ -20,7 +20,7 @@ const AllAnnouncements = () => {
 
   return (
     <div className="max-w-5xl py-2 mx-auto mt-8">
-      <h2 className="text-xl font-semibold mb-4">📢 Latest Announcements ({announcements.length})</h2>
+      <h2 className="text-3xl font-bold mb-4 text-center">📢 Latest Announcements ({announcements.length})</h2>
       <div className="space-y-4">
         {announcements.map((item) => (
           <div key={item._id} className=" bg-cyan-100 rounded p-4 shadow shadow-blue-300">

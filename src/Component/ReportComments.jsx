@@ -62,13 +62,13 @@ const ReportComments = ({ postId }) => {
 
   return (
     <div className="overflow-x-auto max-w-5xl mx-auto mt-6">
-      <table className="table table-zebra w-full">
+      <table className="table  w-full ">
         <thead>
           <tr>
-            <th>Commenter Email</th>
-            <th>Comment</th>
-            <th>Feedback</th>
-            <th>Report</th>
+            <th className="text-gray-500">Commenter Email</th>
+            <th className="text-gray-500">Comment</th>
+            <th className="text-gray-500">Feedback</th>
+            <th className="text-gray-500">Report</th>
           </tr>
         </thead>
         <tbody>
@@ -81,13 +81,13 @@ const ReportComments = ({ postId }) => {
 
             return (
               <tr key={comment._id}>
-                <td>{comment.authorEmail}</td>
-                <td>
+                <td className="text-black">{comment.authorEmail}</td>
+                <td className="text-black ">
                   {displayText}
                   {isLong && (
                     <button
                       onClick={() => setModalComment(comment.commentText)}
-                      className="text-blue-600 underline ml-1"
+                      className=" text-black underline ml-1"
                     >
                       Read More
                     </button>
@@ -112,7 +112,7 @@ const ReportComments = ({ postId }) => {
                 </td>
                 <td>
                   <button
-                    className="btn btn-sm btn-error"
+                    className="btn btn-sm btn-primary"
                     disabled={!selectedFeedback[comment._id] || isReported}
                     onClick={() => handleReportClick(comment._id)}
                   >

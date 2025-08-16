@@ -14,9 +14,9 @@ const CountAnnouncement = () => {
     },
   });
     return (
-        <div className='flex '>
+        <div className='flex'>
             <p>📢</p>
-            <h2 className=" flex">{announcements.length}</h2>
+            <h2 className=" flex text-black">{announcements.length}</h2>
         </div>
     );
 };

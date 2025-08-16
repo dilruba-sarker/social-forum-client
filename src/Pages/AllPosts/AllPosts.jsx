@@ -55,8 +55,8 @@ const AllPosts = ({ searchTerm }) => {
   }, [isLoading, posts.length]);
 
   return (
-    <div ref={postsRef} className="max-w-6xl bg-blue-300 mx-auto px-4 py-10">
-      <h2 className="text-3xl font-bold mb-6">All Posts</h2>
+    <div ref={postsRef} className="max-w-6xl  mx-auto px-4 py-10">
+      <h2 className="text-3xl text-center font-bold mb-6">All Posts</h2>
 
       <div className="flex justify-end mb-6 space-x-2">
         <button
@@ -81,7 +81,7 @@ const AllPosts = ({ searchTerm }) => {
         <p className="text-center text-gray-500">No posts found.</p>
       ) : (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className=" flex flex-col gap-4 ">
             {posts.map((post) => (
               
               
@@ -104,19 +104,29 @@ const AllPosts = ({ searchTerm }) => {
                     </p>
                   </div>
                 </div>
-                {/* <Link
+                <Link
                   to={`/post/${post._id}`}
-                  className="text-xl font-bold text-blue-600 mb-2 hover:underline block"
+                  className="text-xl font-bold text-black mb-2 hover:underline block"
                 >
                   {post.title}
-                </Link> */}
-                <p className="text-sm text-gray-600 mb-2">Tag: {post.tag}</p>
+                </Link>
+                <div className="flex gap-8">
+                  <p className="text-sm text-gray-600 mb-2">Tag: {post.tag}</p>
+                <Link
+                  to={`/post/${post._id}`}
+                  className="bg-indigo-700 text-white p-1 rounded-md"
+                >
+                See More
+                </Link>
+                </div>
                 <div className="flex flex-wrap items-center text-sm text-gray-600 gap-4 mt-3">
                   <span>👍 Upvotes: {post.upVote || 0}</span>
                   <span>👎 Downvotes: {post.downVote || 0}</span>
                   <span>🗳️ Total Votes: {(post.upVote || 0) - (post.downVote || 0)}</span>
                   <CommentCount postId={post._id} />
                 </div>
+              
+                
               </div>
               </Link>
             ))}
