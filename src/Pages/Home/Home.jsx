@@ -9,6 +9,7 @@ import ReviewPage from '../../Component/ReviewPage/ReviewPage';
 import NewsletterSection from '../../Component/NewsletterSection/NewsletterSection';
 import FeaturedPage from '../../Component/FeaturedPage/FeaturedPage';
 import RecentProductsPage from '../../Component/RecentProductsPage/RecentProductsPage';
+import Services from '../../Component/Services/Services';
 
 
 const Home = () => {
@@ -33,6 +34,7 @@ const Home = () => {
       <AllAnnouncements />
       <AllPosts searchTerm={searchTerm} />
       <ReviewPage></ReviewPage>
+      <Services></Services>
       <FeaturedPage></FeaturedPage>
       <RecentProductsPage></RecentProductsPage>
       <NewsletterSection></NewsletterSection>
