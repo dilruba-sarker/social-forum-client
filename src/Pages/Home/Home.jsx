@@ -1,22 +1,3 @@
-// import React from 'react';
-// import AllPosts from '../AllPosts/AllPosts';
-// import TagsSection from '../../Component/TagsSection/TagsSection';
-// import AllAnnouncements from '../../Component/AllAnnouncements';
-// import Banner from '../../Component/BannerWithSearch/Banner';
-
-// const Home = () => {
-//     return (
-//         <div>
-//            <Banner></Banner>
-//             <TagsSection></TagsSection>
-//             <AllAnnouncements></AllAnnouncements>
-
-//             <AllPosts></AllPosts>
-//         </div>
-//     );
-// };
-
-// export default Home;
 
 
 import React, { useRef, useState } from 'react';
