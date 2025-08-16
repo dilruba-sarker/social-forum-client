@@ -5,6 +5,8 @@ import AllPosts from '../AllPosts/AllPosts';
 import TagsSection from '../../Component/TagsSection/TagsSection';
 import AllAnnouncements from '../../Component/AllAnnouncements';
 import Banner from '../../Component/BannerWithSearch/Banner';
+import ReviewPage from '../../Component/ReviewPage/ReviewPage';
+import NewsletterSection from '../../Component/NewsletterSection/NewsletterSection';
 
 
 const Home = () => {
@@ -28,6 +30,8 @@ const Home = () => {
       <TagsSection />
       <AllAnnouncements />
       <AllPosts searchTerm={searchTerm} />
+      <ReviewPage></ReviewPage>
+      <NewsletterSection></NewsletterSection>
      
     </div>
   );
