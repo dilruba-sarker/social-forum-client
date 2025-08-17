@@ -24,6 +24,7 @@ import MakeAnnouncement from "../src/Pages/Dashboard/MakeAnnouncement/MakeAnnoun
 import ErrorPage from "../src/Component/ErrorPage/ErrorPage";
 import PrivacyPolicy from "../src/Component/PrivacyPolicy/PrivacyPolicy";
 import AboutUs from "../src/Component/AboutUs/AboutUs";
+import Contact from "../src/Component/Contact/Contact";
 
 export const router = createBrowserRouter([
   { path: "/",
@@ -62,7 +63,10 @@ export const router = createBrowserRouter([
          {
           path:'/about',
           element:<PrivateRoute> <AboutUs></AboutUs></PrivateRoute> 
-         },
+         },{
+          path:'/contract',
+          element:<Contact></Contact>
+         }
       ]
     
     },{

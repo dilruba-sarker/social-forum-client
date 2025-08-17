@@ -366,18 +366,7 @@ const PrivacyPolicy = () => {
             </section>
 
             {/* Back to top */}
-            <div className="flex justify-end">
-              <a
-                href="#top"
-                onClick={(e) => {
-                  e.preventDefault();
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-                }}
-                className="inline-block text-sm text-indigo-600 dark:text-indigo-400 hover:underline"
-              >
-                ↑ Back to top
-              </a>
-            </div>
+          
           </motion.div>
         </main>
       </div>
